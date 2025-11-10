@@ -9,17 +9,20 @@ trigger:
 pool: devops
 
 steps:
+- task: Maven@4
 - script: |
     echo JAVA_HOME=%JAVA_HOME%
     java -version
     mvn -version
   displayName: 'Verify Java and Maven'
 
-- task: Maven@3
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'Path'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.21'
+    jdkSourceOption: 'PreInstalled'    
     jdkDirectory: 'C:\Program Files\jdk-21.0.7'   # adjust this
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
